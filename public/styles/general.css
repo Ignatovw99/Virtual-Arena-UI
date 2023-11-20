@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(177, 177, 177);
+}
+
+li,
+a,
+button {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(237, 240, 241);
+}
+
+button {
+    background-color: rgb(10, 102, 194);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease 0s, background-color 0.25s ease 0s;
+}
+
+button:hover {
+    background-color: rgba(50, 152, 255, 0.7);
+}
+
+button:active {
+    transform: translate(2px, 2px);
+}
