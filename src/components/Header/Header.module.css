@@ -3,7 +3,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #1a1616;
+    background-color: rgb(26, 22, 22);
     padding: 5px 5% 5px 10%;
 }
 
@@ -66,6 +66,7 @@ header {
 .profile-name {
     padding: 0;
     margin: 0;
+    color: black;
     font-size: 18px;
     font-weight: 500;
 }
