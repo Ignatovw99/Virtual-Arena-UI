@@ -1,3 +1,5 @@
+import EventTabBar from "../EventTabBar";
+
 import styles from "./Event.module.css";
 
 const Event = () => {
@@ -6,17 +8,7 @@ const Event = () => {
             <h2 className={styles.title}>
                 Event Title
             </h2>
-            <div className={styles["tab-bar"]}>
-                <button className={styles["tab-bar-button"]}>
-                    Details
-                </button>
-                <button className={`${styles["tab-bar-button"]} ${styles.selected}`}>
-                    Q&A
-                </button>
-                <button className={styles["tab-bar-button"]}>
-                    Polls
-                </button>
-            </div>
+            <EventTabBar />
             <div className={styles["details-wrapper"]}>
                 <div className={styles["details-container"]}>
                     <div className={styles["event-image-container"]}>

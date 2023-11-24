@@ -16,44 +16,6 @@
     margin-bottom: 30px;
 }
 
-.tab-bar {
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 150px;
-    margin-right: 150px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6) inset;
-}
-
-.tab-bar-button {
-    font-size: 18px;
-    font-weight: 600;
-    color: rgb(26, 22, 22);
-    background: none;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.tab-bar-button:active {
-    transform: none;
-}
-
-.tab-bar-button:hover {
-    background: none;
-    color: rgb(150, 150, 150)
-}
-
-.tab-bar-button.selected {
-    color: rgb(46, 204, 64);
-    border-bottom: 3px solid rgb(46, 204, 64);
-    border-radius: 0;
-}
-
 .details-wrapper {
     display: flex;
     flex-direction: column;
