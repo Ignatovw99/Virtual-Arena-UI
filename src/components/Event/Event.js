@@ -1,6 +1,6 @@
 import EventTabBar from "../EventTabBar";
 import EventOverview from "../EventOverview";
-import PollsList from "../PollsList";
+import PollsRegistry from "../PollsRegistry";
 import QuestionAnswerSection from "../QuestionAnswerSection";
 
 import styles from "./Event.module.css";
@@ -13,7 +13,7 @@ const Event = () => {
             </h2>
             <EventTabBar />
             <EventOverview />
-            <PollsList />
+            <PollsRegistry />
             <QuestionAnswerSection />
         </section>
     );

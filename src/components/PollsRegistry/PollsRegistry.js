@@ -1,8 +1,8 @@
 import Poll from "../Poll";
 
-import styles from "./PollsList.module.css";
+import styles from "./PollsRegistry.module.css";
 
-const PollsList = () => {
+const PollsRegistry = () => {
     return (
         <div className={styles["polls-container"]}>
             <Poll />
@@ -12,4 +12,4 @@ const PollsList = () => {
     );
 };
 
-export default PollsList;
+export default PollsRegistry;
