@@ -1,5 +1,7 @@
 import EventTabBar from "../EventTabBar";
 import EventOverview from "../EventOverview";
+import PollsRegistry from "../PollsRegistry";
+import QuestionAnswerSection from "../QuestionAnswerSection";
 
 import styles from "./Event.module.css";
 
@@ -11,6 +13,8 @@ const Event = () => {
             </h2>
             <EventTabBar />
             <EventOverview />
+            <PollsRegistry />
+            <QuestionAnswerSection />
         </section>
     );
 };

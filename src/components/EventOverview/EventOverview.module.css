@@ -5,7 +5,9 @@
     background-color: white;
     padding: 40px;
     border-radius: 16px;
-    margin: 40px 20px;
+    margin-bottom: 40px;
+    margin-right: 40px;
+    margin-left: 40px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6) inset;
 }
 
