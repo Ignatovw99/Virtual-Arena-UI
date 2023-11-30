@@ -1,7 +1,7 @@
 .message-container-wrapper {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     background-color: white;
     padding: 10px 30px;
     border-radius: 16px;
