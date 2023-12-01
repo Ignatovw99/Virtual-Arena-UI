@@ -4,11 +4,13 @@ import Banner from "./components/Banner";
 import EventsCatalog from "./components/EventsCatalog";
 import Event from "./components/Event";
 
+import { UserProvider } from "./contexts/UserContext";
+
 import styles from "./App.module.css";
 
 function App() {
     return (
-        <div>
+        <UserProvider>
             <Header />
             <div className={styles["app-body"]}>
                 <Banner />
@@ -16,7 +18,7 @@ function App() {
                 <Event />
             </div>
             <Footer />
-        </div>
+        </UserProvider>
     );
 }
 
