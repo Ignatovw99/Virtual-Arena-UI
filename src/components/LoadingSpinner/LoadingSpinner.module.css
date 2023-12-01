@@ -1,0 +1,48 @@
+.spinner-overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.spinner {
+    position: absolute;
+    top: calc(50% - 75px);
+    left: calc(50% - 75px);
+    z-index: 55;
+}
+
+.spinner:after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 12px solid;
+    border-color: rgb(46, 204, 64) transparent rgb(46, 204, 64) transparent;
+    animation: spinner 1.2s linear infinite;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-text {
+    position: absolute;
+    top: calc(43%);
+    left: calc(25%);
+    font-weight: 700;
+    font-size: 16px;
+}
