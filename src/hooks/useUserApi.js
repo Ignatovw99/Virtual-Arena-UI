@@ -5,7 +5,7 @@ import { API_BASE_URL, USER_PROFILE_URL } from "../constants/api";
 import { POST_METHOD } from "../constants/request";
 
 const useUserApi = (requestConfig) => {
-    const { request, loading, error } = useHttpRequest(requestConfig);
+    const { request, loading, error, alert, showAlert } = useHttpRequest(requestConfig);
 
     const getUserProfile = async () => {
         const url = getRequestUrl(API_BASE_URL, USER_PROFILE_URL);
@@ -22,7 +22,14 @@ const useUserApi = (requestConfig) => {
         return await response.json();
     };
 
-    return { getUserProfile, createUserProfile, loading, error };
+    return {
+        getUserProfile,
+        createUserProfile,
+        loading,
+        error,
+        alert,
+        showAlert
+    };
 };
 
 export default useUserApi;
