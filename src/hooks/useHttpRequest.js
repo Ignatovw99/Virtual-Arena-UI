@@ -1,9 +1,8 @@
-import { useState } from "react";
-
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { ErrorAlert } from "../components/Alert";
-import useAlert from "./useAlert";
+import { useAlertConditionally } from "./useAlert";
+import useStateConditionally from "./useStateConditionally";
 
 import {
     GET_METHOD,
@@ -12,31 +11,17 @@ import {
     CONTENT_TYPE_HEADER
 } from "../constants/request";
 
-const useHttpRequest = (requestConfig) => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const { alert, showAlert } = useAlert();
+const useHttpRequest = (requestConfiguration) => {
+    const [loading, setLoading] = useStateConditionally(false, requestConfiguration.includeLoading);
+    const [error, setError] = useStateConditionally(null, requestConfiguration.includeError);
+    const { alert, showAlert } = useAlertConditionally(requestConfiguration.includeAlert);
     const { getAccessTokenSilently } = useAuth0();
 
-    const setLoadingBasedOnConfig = (value) => {
-        if (requestConfig && requestConfig.excludeLoading) {
+    const executeWithAppliedConfig = (config, action, ...values) => {
+        if (!config) {
             return;
         }
-        setLoading(value);
-    };
-
-    const setErrorBasedOnConfig = (err) => {
-        if (requestConfig && requestConfig.excludeError) {
-            return;
-        }
-        setError(err);
-    };
-
-    const showAlertBasedOnConfig = (AlertComponent, message) => {
-        if (requestConfig && requestConfig.excludeAlert) {
-            return;
-        }
-        showAlert(AlertComponent, message);
+        action(...values);
     };
 
     const createAuthorizationHeader = async () => {
@@ -73,7 +58,7 @@ const useHttpRequest = (requestConfig) => {
 
     const request = async (url, options) => {
         try {
-            setLoadingBasedOnConfig(true);
+            setLoading(true);
             const requestOptions = await createRequestOptions(options);
             const response = await fetch(url, requestOptions);
             if (!response.ok) {
@@ -81,13 +66,15 @@ const useHttpRequest = (requestConfig) => {
             }
             return response;
         } catch (errorResponse) {
-            showAlertBasedOnConfig(ErrorAlert, errorResponse.message);
-            setErrorBasedOnConfig(errorResponse);
-            if (!(requestConfig && requestConfig.hideError)) {
-                throw errorResponse;
-            }
+            showAlert(ErrorAlert, errorResponse.message);
+            setError(errorResponse);
+            executeWithAppliedConfig(
+                requestConfiguration.throwError,
+                (error) => { throw error; },
+                errorResponse
+            );
         } finally {
-            setLoadingBasedOnConfig(false);
+            setLoading(false);
         }
     };
 

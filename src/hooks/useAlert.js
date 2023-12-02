@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useAlert = () => {
+export const useAlert = () => {
     const [alertState, setAlertState] = useState(null);
 
     const showAlert = (AlertComponent, message) => {
@@ -21,4 +21,12 @@ const useAlert = () => {
     return { alert, showAlert };
 };
 
-export default useAlert;
+export const useAlertConditionally = (includeAlert) => {
+    const { alert, showAlert } = useAlert();
+    return includeAlert ?
+        { alert, showAlert } :
+        {
+            alert: undefined,
+            showAlert: () => { }
+        }
+};
