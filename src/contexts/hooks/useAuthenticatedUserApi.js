@@ -22,11 +22,13 @@ const useAuthenticatedUserApi = () => {
             return;
         }
 
-        if (isAuthenticated) {
-            loadAuthenticatedUserProfile();
-        }
+        (async () => {
+            if (isAuthenticated) {
+                await loadAuthenticatedUserProfile();
+            }
+            setLoading(false);
+        })();
 
-        setLoading(false);
         // eslint-disable-next-line
     }, [isAuthLoading, isAuthenticated]);
 
