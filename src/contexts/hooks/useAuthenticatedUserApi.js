@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
+import { ErrorAlert } from "../../components/Alert";
 import useUserApi from "../../hooks/useUserApi";
 import useAlert from "../../hooks/useAlert";
-
-import { ERROR_ALERT_TYPE } from "../../constants/common";
 
 const useAuthenticatedUserApi = () => {
     const [user, setUser] = useState(null);
@@ -36,7 +35,7 @@ const useAuthenticatedUserApi = () => {
             const idTokenClaims = await getIdTokenClaims();
             return await createUserProfile(idTokenClaims);
         } catch (err) {
-            showAlert(ERROR_ALERT_TYPE, err.message);
+            showAlert(ErrorAlert, err.message);
         }
     };
 
