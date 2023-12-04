@@ -7,6 +7,7 @@ import Event from "./components/Event";
 import { UserProvider } from "./contexts/UserContext";
 
 import styles from "./App.module.css";
+import UpdateUserProfile from "./components/UpdateUserProfile";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Banner />
                 <EventsCatalog />
                 <Event />
+                <UpdateUserProfile />
             </div>
             <Footer />
         </UserProvider>

@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { ErrorAlert } from "../components/Alert";
-import { useAlertConditionally } from "./useAlert";
 import useStateConditionally from "./useStateConditionally";
+import { useAlertConditionally } from "./useAlert";
 
 import {
     GET_METHOD,
@@ -16,13 +16,6 @@ const useHttpRequest = (requestConfiguration) => {
     const [error, setError] = useStateConditionally(null, requestConfiguration.includeError);
     const { alert, showAlert } = useAlertConditionally(requestConfiguration.includeAlert);
     const { getAccessTokenSilently } = useAuth0();
-
-    const executeWithAppliedConfig = (config, action, ...values) => {
-        if (!config) {
-            return;
-        }
-        action(...values);
-    };
 
     const createAuthorizationHeader = async () => {
         try {
@@ -68,11 +61,7 @@ const useHttpRequest = (requestConfiguration) => {
         } catch (errorResponse) {
             showAlert(ErrorAlert, errorResponse.message);
             setError(errorResponse);
-            executeWithAppliedConfig(
-                requestConfiguration.throwError,
-                (error) => { throw error; },
-                errorResponse
-            );
+            throw errorResponse;
         } finally {
             setLoading(false);
         }
