@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
+import { ErrorAlert } from "../../components/Alert";
 import useUserApi from "../../hooks/useUserApi";
-import useAlert from "../../hooks/useAlert";
-
-import { ERROR_ALERT_TYPE } from "../../constants/common";
+import { useAlert } from "../../hooks/useAlert";
 
 const useAuthenticatedUserApi = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const { isAuthenticated, isLoading: isAuthLoading, getIdTokenClaims } = useAuth0();
     const { getUserProfile, createUserProfile } = useUserApi({
-        excludeLoading: true,
-        excludeError: true,
-        excludeAlert: true
+        throwError: true
     });
     const { alert, showAlert } = useAlert();
 
@@ -23,11 +20,13 @@ const useAuthenticatedUserApi = () => {
             return;
         }
 
-        if (isAuthenticated) {
-            loadAuthenticatedUserProfile();
-        }
+        (async () => {
+            if (isAuthenticated) {
+                await loadAuthenticatedUserProfile();
+            }
+            setLoading(false);
+        })();
 
-        setLoading(false);
         // eslint-disable-next-line
     }, [isAuthLoading, isAuthenticated]);
 
@@ -36,7 +35,7 @@ const useAuthenticatedUserApi = () => {
             const idTokenClaims = await getIdTokenClaims();
             return await createUserProfile(idTokenClaims);
         } catch (err) {
-            showAlert(ERROR_ALERT_TYPE, err.message);
+            showAlert(ErrorAlert, err.message);
         }
     };
 

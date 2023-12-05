@@ -1,22 +1,32 @@
 import { useState } from "react";
 
-import Alert from "../components/Alert";
-
-const useAlert = () => {
+export const useAlert = () => {
     const [alertState, setAlertState] = useState(null);
 
-    const showAlert = (type, message) => {
-        setAlertState({ type, message });
+    const showAlert = (AlertComponent, message) => {
+        setAlertState({ AlertComponent, message });
     };
 
     const closeAlert = () => {
         setAlertState(null);
     };
 
-    const alertProps = { closeAlert, ...alertState };
-    const alert = alertState && <Alert {...alertProps} />;
+    const alert = alertState && alertState.AlertComponent && (
+        <alertState.AlertComponent
+            message={alertState.message}
+            closeAlert={closeAlert}
+        />
+    );
 
     return { alert, showAlert };
 };
 
-export default useAlert;
+export const useAlertConditionally = (includeAlert) => {
+    const { alert, showAlert } = useAlert();
+    return includeAlert ?
+        { alert, showAlert } :
+        {
+            alert: undefined,
+            showAlert: () => { }
+        }
+};
