@@ -11,18 +11,6 @@
     margin-top: 5px;
 }
 
-.upload-container input {
-    font-size: 16px;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #ccc;
-    height: 40px;
-    width: 100%;
-    margin-top: 5px;
-    outline: none;
-}
-
 ::-webkit-file-upload-button {
     color: white;
     background-color: #206a5d;
