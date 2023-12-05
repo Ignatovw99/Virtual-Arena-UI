@@ -23,6 +23,7 @@ import {
     PROFILE_PICTURE_FIELD_NAME,
     BIO_FIELD_LABEL,
     BIO_FIELD_NAME,
+    USER_UPDATED_SUCCESSFULLY
 } from "./constants";
 
 const UpdateUserProfile = () => {
@@ -51,7 +52,7 @@ const UpdateUserProfile = () => {
 
         try {
             await updateUserProfile(formData);
-            showAlert(SuccessAlert, "User updated successfully");
+            showAlert(SuccessAlert, USER_UPDATED_SUCCESSFULLY);
         } catch (errorResponse) {
             showAlert(ErrorAlert, errorResponse.message);
         }
