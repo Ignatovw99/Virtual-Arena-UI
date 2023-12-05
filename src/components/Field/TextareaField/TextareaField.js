@@ -10,7 +10,9 @@ export const TextareaField = ({
 
     return (
         <div className={styles["input-container"]}>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={name}>
+                {label}
+            </label>
             <textarea
                 name={name}
                 id={name}

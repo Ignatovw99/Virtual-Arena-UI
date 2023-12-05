@@ -9,10 +9,12 @@ const InputField = ({
     autoComplete = "off"
 }) => {
     const inputValue = value || "";
-    
+
     return (
         <div className={styles["input-container"]}>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={name}>
+                {label}
+            </label>
             <input
                 type={type}
                 name={name}
