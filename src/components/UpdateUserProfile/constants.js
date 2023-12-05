@@ -21,3 +21,5 @@ export const PHONE_NUMBER_FIELD_LABEL = "Phone Number";
 export const BIO_FIELD_NAME = "bio";
 
 export const BIO_FIELD_LABEL = "Bio";
+
+export const USER_UPDATED_SUCCESSFULLY = "User updated successfully";
