@@ -8,7 +8,7 @@ import { useUserContext } from "../../contexts/UserContext";
 import { useAlert } from "../../hooks/useAlert";
 import useUserApi from "../../hooks/useUserApi";
 
-import { createEmptyFile, normalizeValue } from "../../utils/request";
+import { changeStateValueHandler, createFormData, createEmptyFile } from "../../utils/request";
 
 import {
     UPDATE_USER_FORM_TITLE,
@@ -37,12 +37,7 @@ const UpdateUserProfile = () => {
 
     const updateUserHandler = async (event) => {
         event.preventDefault();
-        const formData = new FormData();
-
-        Object.entries(user)
-            .map(([property, value]) => [property, normalizeValue(value)])
-            .filter(([property, value]) => value)
-            .forEach(([property, value]) => formData.append(property, value));
+        const formData = createFormData(user);
 
         const pictureToSent = pictureFile || user.profilePicture ?
             pictureFile :
@@ -58,17 +53,7 @@ const UpdateUserProfile = () => {
         }
     };
 
-    const changeUserValueHandler = (event) => {
-        const inputField = event.target;
-        if (!inputField) {
-            return;
-        }
-
-        setUser(state => ({
-            ...state,
-            [inputField.name]: inputField.value
-        }));
-    };
+    const changeUserValueHandler = (event) => changeStateValueHandler(event, setUser);
 
     const uploadProfilePicture = (file) => {
         setPictureFile(file);
