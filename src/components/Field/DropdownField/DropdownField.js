@@ -20,6 +20,9 @@ const DropdownField = ({
                 value={selectedValue}
                 onChange={onChange}
             >
+                <option disabled={true} value="">
+                    Select an option
+                </option>
                 {options.map(option =>
                     <option
                         key={option.value}

@@ -8,6 +8,7 @@ import { UserProvider } from "./contexts/UserContext";
 
 import styles from "./App.module.css";
 import UpdateUserProfile from "./components/UpdateUserProfile";
+import OrganizeEvent from "./components/OrganizeEvent/OrganizeEvent";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <EventsCatalog />
                 <Event />
                 <UpdateUserProfile />
+                <OrganizeEvent />
             </div>
             <Footer />
         </UserProvider>
