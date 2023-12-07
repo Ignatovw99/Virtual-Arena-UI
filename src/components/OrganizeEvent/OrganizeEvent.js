@@ -22,9 +22,12 @@ import {
     START_DATE_TIME_FIELD_LABEL,
     CATEGORY_FIELD_NAME,
     CATEGORY_FIELD_LABEL,
-    CATEGROY_OPTIONS,
     EVENT_ORGANIZED_SUCCESSFULLY
 } from "./constants";
+import { EVENT_CATEGORY_OPTIONS } from "../../constants/common";
+
+const CATEGORY_DROPDOWN_OPTIONS = Object.entries(EVENT_CATEGORY_OPTIONS)
+    .map(([value, label]) => ({ label, value }));
 
 const OrganizeEvent = () => {
     const [event, setEvent] = useState({
@@ -105,7 +108,7 @@ const OrganizeEvent = () => {
                     name={CATEGORY_FIELD_NAME}
                     label={CATEGORY_FIELD_LABEL}
                     value={event.category}
-                    options={CATEGROY_OPTIONS}
+                    options={CATEGORY_DROPDOWN_OPTIONS}
                     onChange={changeEventValueHandler}
                 />
             </Form>
