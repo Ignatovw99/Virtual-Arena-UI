@@ -1,52 +1,42 @@
 import { useState } from "react";
 
-import { ErrorAlert } from "../components/Alert";
 import useEventApi from "./useEventApi";
 import useUserApi from "./useUserApi";
-import { useAlert } from "./useAlert";
 
 const useEventDetailsApi = () => {
     const [loading, setLoading] = useState(false);
-    const { alert, showAlert } = useAlert();
     const { getAllEvents, getEventById } = useEventApi();
     const { getUserProfileById } = useUserApi();
 
     const getAllEventsDetails = async () => {
-        try {
-            setLoading(true);
+        setLoading(true);
 
-            const events = await getAllEvents();
-            const organizers = await Promise.all(
-                events.map(event => getUserProfileById(event.organizerId))
-            );
+        const events = await getAllEvents();
+        const organizers = await Promise.all(
+            events.map(event => getUserProfileById(event.organizerId))
+        );
+        const eventsDetails = events.map((event, index) => createEventDetails(event, organizers[index]));
 
-            return events.map((event, index) => createEventDetails(event, organizers[index]));
-        } catch (error) {
-            showAlert(ErrorAlert, error.message);
-        } finally {
-            setLoading(false);
-        }
+        setLoading(false);
+        return eventsDetails;
     };
 
     const getEventDetails = async (id) => {
-        try {
-            setLoading(true);
 
-            const event = await getEventById(id);
-            const organizer = await getUserProfileById(event.organizerId);
-            return createEventDetails(event, organizer);
-        } catch (error) {
-            showAlert(ErrorAlert, error.message);
-        } finally {
-            setLoading(false);
-        }
+        setLoading(true);
+
+        const event = await getEventById(id);
+        const organizer = await getUserProfileById(event.organizerId);
+        const eventDetails = createEventDetails(event, organizer);
+
+        setLoading(false);
+        return eventDetails;
     };
 
     return {
         getAllEventsDetails,
         getEventDetails,
-        loading,
-        alert
+        loading
     };
 };
 
