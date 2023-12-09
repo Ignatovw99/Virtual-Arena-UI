@@ -11,7 +11,13 @@ const useUserApi = (requestConfiguration) => {
 
     const getUserProfile = async () => {
         const response = await request(requestUrl);
-        return await response.json();
+        return response.json();
+    };
+
+    const getUserProfileById = async (id) => {
+        const url = `${requestUrl}/${id}`;
+        const response = await request(url);
+        return response.json();
     };
 
     const createUserProfile = async (userProfile) => {
@@ -19,7 +25,7 @@ const useUserApi = (requestConfiguration) => {
             method: POST_METHOD,
             body: JSON.stringify(userProfile)
         });
-        return await response.json();
+        return response.json();
     };
 
     const updateUserProfile = async (userFormData) => {
@@ -28,11 +34,12 @@ const useUserApi = (requestConfiguration) => {
             body: userFormData,
             headers: {}
         });
-        return await response.json();
+        return response.json();
     };
 
     return {
         getUserProfile,
+        getUserProfileById,
         createUserProfile,
         updateUserProfile,
         loading,
