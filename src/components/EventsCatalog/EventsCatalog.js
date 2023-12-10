@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import EventItem from "../EventItem";
 import LoadingSpinner from "../LoadingSpinner";
+import { ErrorAlert } from "../Alert";
 import useEventDetailsApi from "../../hooks/useEventDetailsApi";
 import { useAlert } from "../../hooks/useAlert";
 
@@ -26,7 +27,7 @@ const EventsCatalog = () => {
             const eventsDetails = await getAllEventsDetails();
             setEvents(eventsDetails);
         } catch (error) {
-            showAlert(ErrorEvent, error.message);
+            showAlert(ErrorAlert, error.message);
         }
     };
 

@@ -1,0 +1,40 @@
+.ask-question-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 16px;
+    margin-bottom: 50px;
+}
+
+.ask-question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    color: black;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.ask-question-button {
+    background-color: rgb(46, 204, 64);
+}
+
+.ask-question-button:hover {
+    background-color: rgba(46, 204, 64, 0.8);
+}
+
+button:active {
+    transform: none;
+}
+
+.close-button {
+    padding-right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
