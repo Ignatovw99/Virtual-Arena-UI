@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 import LoadingSpinner from "../components/LoadingSpinner";
+import { ErrorAlert } from "../components/Alert";
 
 import useEventParticipantsApi from "../hooks/api/useEventParticipantsApi";
 import { useWebSocketConnectionContext } from "./WebSocketConnectionContext";
@@ -24,7 +25,7 @@ export const EventContextProvider = ({
     const [participants, setParticipants] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { getAllEventParticipants, alert } = useEventParticipantsApi({ includeAlert: true });
+    const { getAllEventParticipants, alert, showAlert } = useEventParticipantsApi({ includeAlert: true });
 
     const { webSocketClient } = useWebSocketConnectionContext();
     const { subscribeForEventParticipant } = useEventParticipantsWebSocket(webSocketClient);
@@ -33,12 +34,12 @@ export const EventContextProvider = ({
         getAllEventParticipants(7)
             .then(eventParticipants => {
                 setParticipants(eventParticipants);
-                setLoading(false);
                 subscribeForEventParticipant(7, addEventParticipant);
             })
-            .catch(() => {
-                setLoading(false);
-            });
+            .catch(error => {
+                showAlert(ErrorAlert, error.message);
+            })
+            .finally(() => setLoading(false));
             
         // eslint-disable-next-line 
     }, []);

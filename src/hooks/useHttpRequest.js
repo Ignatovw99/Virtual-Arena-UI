@@ -59,7 +59,9 @@ const useHttpRequest = (requestConfiguration = {}) => {
             }
             return response;
         } catch (errorResponse) {
-            showAlert(ErrorAlert, errorResponse.message);
+            if (requestConfiguration.showErrorAlert) {
+                showAlert(ErrorAlert, errorResponse.message);
+            }
             setError(errorResponse);
             throw errorResponse;
         } finally {

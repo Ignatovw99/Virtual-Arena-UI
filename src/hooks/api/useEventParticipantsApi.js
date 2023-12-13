@@ -12,7 +12,7 @@ const useEventParticipantsApi = (requestConfiguration) => {
         return response.json();
     };
 
-    const participateInEvent = async (eventId) => {
+    const signUpForEvent = async (eventId) => {
         const requestUrl = `${API_BASE_URL}/api/events/${eventId}/participants`;
         const response = await request(requestUrl, {
             method: POST_METHOD
@@ -22,7 +22,7 @@ const useEventParticipantsApi = (requestConfiguration) => {
 
     return {
         getAllEventParticipants,
-        participateInEvent,
+        signUpForEvent,
         loading,
         setLoading,
         error,

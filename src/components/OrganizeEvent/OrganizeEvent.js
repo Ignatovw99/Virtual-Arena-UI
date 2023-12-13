@@ -4,7 +4,6 @@ import Form from "../Form";
 import { InputField, ImageField, TextareaField, DropdownField } from "../Field";
 import LoadingSpinner from "../LoadingSpinner";
 import { SuccessAlert, ErrorAlert } from "../Alert";
-import { useAlert } from "../../hooks/useAlert";
 import useEventApi from "../../hooks/useEventApi";
 
 import { changeStateValueHandler, createFormData } from "../../utils/request";
@@ -37,10 +36,10 @@ const OrganizeEvent = () => {
         category: "",
         imageFile: null
     });
-    const { createEvent, loading } = useEventApi({
-        includeLoading: true
-    })
-    const { alert, showAlert } = useAlert();
+    const { createEvent, loading, alert, showAlert } = useEventApi({
+        includeLoading: true,
+        includeAlert: true
+    });
 
     const organizeEventHandler = async (e) => {
         e.preventDefault();

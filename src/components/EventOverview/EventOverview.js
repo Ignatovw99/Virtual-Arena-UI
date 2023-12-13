@@ -1,42 +1,56 @@
-import { useEffect, useState } from "react";
-
 import LoadingSpinner from "../LoadingSpinner";
-import { ErrorAlert } from "../Alert";
-import useEventDetailsApi from "../../hooks/useEventDetailsApi";
-import { useAlert } from "../../hooks/useAlert";
+import { ErrorAlert, SuccessAlert } from "../Alert";
+
+import { useAlertOnce } from "../../hooks/useAlert";
+import { useEventContext } from "../../contexts/EventContext";
+import useEventParticipantsApi from "../../hooks/api/useEventParticipantsApi";
 
 import { formatDate } from "../../utils";
 import { getEventCategoryLabel, getEventImageUrl } from "../../utils/event";
 
 import styles from "./EventOverview.module.css";
 
-const EventOverview = () => {
-    const [event, setEvent] = useState({});
-    const { getEventDetails, loading } = useEventDetailsApi();
-    const { alert, showAlert } = useAlert();
+import { EVENT_SIGN_UP_SUCCESSFUL } from "./constants";
 
-    useEffect(() => {
-        loadEventDetails();
-        // eslint-disable-next-line
-    }, []);
+const EventOverview = ({
+    event,
+    loading,
+    error
+}) => {
+    const { participants } = useEventContext();
+    const {
+        signUpForEvent,
+        loading: loadingEventSignUp,
+        alert,
+        showAlert
+    } = useEventParticipantsApi({ includeLoading: true, includeAlert: true });
+    const {
+        alert: errorAlert,
+        showAlert: showErrorAlert
+    } = useAlertOnce();
 
-    const loadEventDetails = async () => {
-        try {
-            const eventDetails = await getEventDetails(7);
-            setEvent(eventDetails);
-        } catch (error) {
-            showAlert(ErrorAlert, error.message);
-        }
-    };
 
-    if (loading) {
+    if (loading || loadingEventSignUp) {
         return <LoadingSpinner />;
     }
+
+    if (error) {
+        showErrorAlert(ErrorAlert, error);
+    }
+
+    const handleSignUpForEvent = (e) => {
+        e.preventDefault();
+
+        signUpForEvent(event.id)
+            .then(() => showAlert(SuccessAlert, EVENT_SIGN_UP_SUCCESSFUL))
+            .catch(error => showAlert(ErrorAlert, error.message));
+    };
 
     const organizer = event.organizer;
 
     return (
         <>
+            {errorAlert}
             {alert}
             <div className={styles["overview-wrapper"]}>
                 <div className={styles["overview-container"]}>
@@ -68,7 +82,7 @@ const EventOverview = () => {
                             Start: {formatDate(event.startDateTime, "DD.MM.YYYY, HH:mm")}
                         </p>
                         <p className={styles["participants-count"]}>
-                            Participants: 176
+                            Participants: {participants.length}
                         </p>
                         <p className={styles.description}>
                             {event.description}
@@ -76,7 +90,9 @@ const EventOverview = () => {
                     </div>
                 </div>
                 <div className={styles["event-buttons-container"]}>
-                    <button>Participate</button>
+                    <button onClick={handleSignUpForEvent}>
+                        Sign Up
+                    </button>
                 </div>
             </div>
         </>
