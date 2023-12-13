@@ -11,7 +11,7 @@ import {
     CONTENT_TYPE_HEADER
 } from "../constants/request";
 
-const useHttpRequest = (requestConfiguration={}) => {
+const useHttpRequest = (requestConfiguration = {}) => {
     const [loading, setLoading] = useStateConditionally(false, requestConfiguration.includeLoading);
     const [error, setError] = useStateConditionally(null, requestConfiguration.includeError);
     const { alert, showAlert } = useAlertConditionally(requestConfiguration.includeAlert);
