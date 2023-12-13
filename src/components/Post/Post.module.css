@@ -1,4 +1,4 @@
-.message-container-wrapper {
+.post-container-wrapper {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -15,9 +15,9 @@
     border-radius: 30px;
 }
 
-.message-container {
+.post-container {
     margin-left: 20px;
-    flex: 1;
+    width: 600px;
     display: flex;
     flex-direction: column;
 }
@@ -31,7 +31,7 @@
     margin-bottom: 3px;
 }
 
-.message-actions-container {
+.post-actions-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
