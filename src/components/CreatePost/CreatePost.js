@@ -3,9 +3,17 @@ import { useUserContext } from "../../contexts/UserContext";
 import styles from "./CreatePost.module.css";
 
 const CreatePost = ({
+    createPost,
     buttonLabel
 }) => {
     const { user } = useUserContext();
+
+    const handleCreatePost = (e) => {
+        e.preventDefault();
+
+        const { content } = Object.fromEntries(new FormData(e.target));
+        createPost(content);
+    };
 
     return (
         <div className={styles["post-container-wrapper"]}>
@@ -20,7 +28,10 @@ const CreatePost = ({
                         {user.fullName}
                     </p>
                 </div>
-                <form className={styles["post-form"]}>
+                <form
+                    className={styles["post-form"]}
+                    onSubmit={handleCreatePost}
+                >
                     <textarea
                         className={styles["textarea-content"]}
                         name="content"

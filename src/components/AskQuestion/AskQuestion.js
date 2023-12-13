@@ -5,10 +5,18 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import CreatePost from "../CreatePost";
 
+import { useWebSocketConnectionContext } from "../../contexts/WebSocketConnectionContext";
+import useQuestionWebSocket from "../../hooks/websocket/useQuestionWebSocket";
+
 import styles from "./AskQuestion.module.css";
 
 const AskQuestion = () => {
     const [active, setActive] = useState(false);
+
+    const { webSocketClient } = useWebSocketConnectionContext();
+    const { sendQuestion } = useQuestionWebSocket(webSocketClient);
+
+    const askQuestion = (content) => sendQuestion(7, content);
 
     return (
         <div className={styles["ask-question-container"]}>
@@ -25,6 +33,7 @@ const AskQuestion = () => {
                         />
                     </div>
                     <CreatePost
+                        createPost={askQuestion}
                         buttonLabel="Ask"
                     />
                 </>
