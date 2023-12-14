@@ -31,7 +31,7 @@
     margin-bottom: 3px;
 }
 
-.post-actions-container {
+.post-details-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,6 +41,11 @@
     font-size: 18px;
     font-weight: bold;
     color: black;
+}
+
+.likes-count {
+    margin-right: 10px;
+    font-size: 15px;
 }
 
 .like-button {

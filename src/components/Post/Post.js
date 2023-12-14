@@ -31,7 +31,12 @@ const Post = ({
                     <p className={styles["sender"]}>
                         {sender.fullName}
                     </p>
-                    <div className={styles["post-actions-container"]}>
+                    <div className={styles["post-details-container"]}>
+                        {likes && likes.length > 0 &&
+                            <span className={styles["likes-count"]}>
+                                {likes.length} like{likes.length > 1 && "s"}
+                            </span>
+                        }
                         {isLikedByUser ?
                             <FontAwesomeIcon
                                 icon={fasThumbsUp}
