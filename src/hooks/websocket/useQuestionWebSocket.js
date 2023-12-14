@@ -4,13 +4,24 @@ const useQuestionWebSocket = (client) => {
 
     const subscribeForEventQuestion = (eventId, handleQuestion) => {
         const subscribeForEventQuestionHandler = () => {
-            client.subscribe(`/topic/events/${eventId}/questions`, (questionFrame) => {
+            return client.subscribe(`/topic/events/${eventId}/questions`, (questionFrame) => {
                 const question = JSON.parse(questionFrame.body);
                 handleQuestion(question);
             });
         };
         
-        executeWithConnectedClient(client, subscribeForEventQuestionHandler);
+        return executeWithConnectedClient(client, subscribeForEventQuestionHandler);
+    };
+
+    const subscribeForQuestionLike = (eventId, questionId, handleQuestionLike) => {
+        const subscribeForQuestionLikeHandler = () => {
+            return client.subscribe(`/topic/events/${eventId}/questions/${questionId}/likes`, (likeFrame) => {
+                const like = JSON.parse(likeFrame.body);
+                handleQuestionLike(like);
+            });
+        };
+        
+        return executeWithConnectedClient(client, subscribeForQuestionLikeHandler);
     };
 
     const sendQuestion = (eventId, content) => {
@@ -19,9 +30,17 @@ const useQuestionWebSocket = (client) => {
         });
     };
 
+    const likeQuestion = (eventId, questionId) => {
+        executeWithConnectedClient(client, () => {
+            client.send(`/app/events/${eventId}/questions/${questionId}/likes`);
+        });
+    };
+
     return {
         subscribeForEventQuestion,
-        sendQuestion
+        subscribeForQuestionLike,
+        sendQuestion,
+        likeQuestion
     };
 };
 
