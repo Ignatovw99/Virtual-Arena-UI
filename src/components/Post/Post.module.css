@@ -46,6 +46,12 @@
 .like-button {
     margin-right: 10px;
     font-size: 20px;
+    cursor: pointer;
+}
+
+.liked-button {
+    margin-right: 10px;
+    font-size: 20px;
 }
 
 .time {

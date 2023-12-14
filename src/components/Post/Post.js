@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faThumbsUp as farThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons';
+
+import { useUserContext } from '../../contexts/UserContext';
 
 import { formatDate } from '../../utils';
 
@@ -8,8 +11,14 @@ import styles from "./Post.module.css";
 const Post = ({
     content,
     sender,
-    timestamp
+    timestamp,
+    likes,
+    likePost
 }) => {
+    const { user } = useUserContext();
+
+    const isLikedByUser = likes.some(like => like.userId === user.id);
+
     return (
         <div className={styles["post-container-wrapper"]}>
             <img
@@ -23,10 +32,17 @@ const Post = ({
                         {sender.fullName}
                     </p>
                     <div className={styles["post-actions-container"]}>
-                        <FontAwesomeIcon
-                            icon={faThumbsUp}
-                            className={styles["like-button"]}
-                        />
+                        {isLikedByUser ?
+                            <FontAwesomeIcon
+                                icon={fasThumbsUp}
+                                className={styles["liked-button"]}
+                            /> :
+                            <FontAwesomeIcon
+                                icon={farThumbsUp}
+                                className={styles["like-button"]}
+                                onClick={likePost}
+                            />
+                        }
                         <p className={styles.time}>
                             {formatDate(timestamp, "HH:mm:ss")}
                         </p>
