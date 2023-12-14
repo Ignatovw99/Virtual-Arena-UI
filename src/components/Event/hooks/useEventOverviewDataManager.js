@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import useEventDetailsApi from "../../../hooks/useEventDetailsApi";
+import useEventDetailsApi from "../../../hooks/api/useEventDetailsApi";
 
 const useEventOverviewDataManager = () => {
     const [event, setEvent] = useState({});

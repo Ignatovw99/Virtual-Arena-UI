@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { ErrorAlert } from "../../components/Alert";
 
-import useUserApi from "../../hooks/useUserApi";
+import useUserApi from "../../hooks/api/useUserApi";
 
 const useAuthenticatedUserApi = () => {
     const [user, setUser] = useState(null);

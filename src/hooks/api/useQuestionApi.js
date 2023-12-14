@@ -1,7 +1,7 @@
-import useHttpRequest from "./useHttpRequest";
+import useHttpRequest from "../useHttpRequest";
 
-import { API_BASE_URL } from "../constants/api";
-import { POST_METHOD } from "../constants/request";
+import { API_BASE_URL } from "../../constants/api";
+import { POST_METHOD } from "../../constants/request";
 
 const useQuestionApi = (requestConfiguration) => {
     const { request, loading, error, alert, showAlert } = useHttpRequest(requestConfiguration);

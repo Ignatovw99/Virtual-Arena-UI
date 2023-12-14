@@ -4,7 +4,7 @@ import EventItem from "../EventItem";
 import LoadingSpinner from "../LoadingSpinner";
 import { ErrorAlert } from "../Alert";
 
-import useEventDetailsApi from "../../hooks/useEventDetailsApi";
+import useEventDetailsApi from "../../hooks/api/useEventDetailsApi";
 import { useAlert } from "../../hooks/useAlert";
 
 import styles from "./EventsCatalog.module.css";

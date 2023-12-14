@@ -4,9 +4,10 @@ import Form from "../Form";
 import { InputField, ImageField, TextareaField } from "../Field";
 import LoadingSpinner from "../LoadingSpinner";
 import { SuccessAlert, ErrorAlert } from "../Alert";
+
 import { useUserContext } from "../../contexts/UserContext";
 import { useAlert } from "../../hooks/useAlert";
-import useUserApi from "../../hooks/useUserApi";
+import useUserApi from "../../hooks/api/useUserApi";
 
 import { changeStateValueHandler, createFormData, createEmptyFile } from "../../utils/request";
 

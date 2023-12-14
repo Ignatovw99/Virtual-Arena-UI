@@ -4,7 +4,8 @@ import Form from "../Form";
 import { InputField, ImageField, TextareaField, DropdownField } from "../Field";
 import LoadingSpinner from "../LoadingSpinner";
 import { SuccessAlert, ErrorAlert } from "../Alert";
-import useEventApi from "../../hooks/useEventApi";
+
+import useEventApi from "../../hooks/api/useEventApi";
 
 import { changeStateValueHandler, createFormData } from "../../utils/request";
 
