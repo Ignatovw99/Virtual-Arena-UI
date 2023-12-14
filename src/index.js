@@ -1,29 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Auth0Provider } from "@auth0/auth0-react";
 
-import authConfig from "./config/authConfig";
-
 import App from './App';
+
+import authConfig from "./config/authConfig";
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <Auth0Provider
-            domain={authConfig.AUTH0_DOMAIN}
-            clientId={authConfig.APP_CLIENT_ID}
-            authorizationParams={{
-                redirect_uri: window.location.origin,
-                audience: authConfig.TOKEN_AUDIENCE
-            }}
-            cacheLocation={authConfig.AUTH_STORAGE_LOCATION}
-            useRefreshTokens={true}
-            useRefreshTokensFallback={true}
-        >
-            <App />
-        </Auth0Provider>
+        <BrowserRouter>
+            <Auth0Provider
+                domain={authConfig.AUTH0_DOMAIN}
+                clientId={authConfig.APP_CLIENT_ID}
+                authorizationParams={{
+                    redirect_uri: window.location.origin,
+                    audience: authConfig.TOKEN_AUDIENCE
+                }}
+                cacheLocation={authConfig.AUTH_STORAGE_LOCATION}
+                useRefreshTokens={true}
+                useRefreshTokensFallback={true}
+            >
+                <App />
+            </Auth0Provider>
+        </BrowserRouter>
     </React.StrictMode>
 );
 

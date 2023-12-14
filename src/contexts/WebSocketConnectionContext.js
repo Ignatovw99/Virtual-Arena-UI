@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
@@ -27,7 +27,7 @@ export const useWebSocketConnectionContext = () => {
 export const WebSocketConnectionProvider = ({
     children
 }) => {
-    const [webSocketClient, setWebSocketClient] = useState(null);
+    const webSocketClientRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const { getAccessTokenSilently } = useAuth0();
     const { alert, showAlert } = useAlert();
@@ -36,6 +36,7 @@ export const WebSocketConnectionProvider = ({
         connectToWebSocketServer();
 
         return () => {
+            const webSocketClient = webSocketClientRef.current;
             if (webSocketClient) {
                 webSocketClient.disconnect();
             }
@@ -53,6 +54,8 @@ export const WebSocketConnectionProvider = ({
         stompClient.connect({ [WS_AUTHORIZATION_HEADER]: accessToken },
             () => handleSuccessfulConnection(stompClient),
             handleConnectionError);
+
+        return stompClient;
     };
 
     const getAccessToken = async () => {
@@ -64,7 +67,7 @@ export const WebSocketConnectionProvider = ({
     };
 
     const handleSuccessfulConnection = (stompClient) => {
-        setWebSocketClient(stompClient);
+        webSocketClientRef.current = stompClient;
         setLoading(false);
     };
 
@@ -79,7 +82,7 @@ export const WebSocketConnectionProvider = ({
 
     return (
         <WebSocketConnectionContext.Provider value={{
-            webSocketClient
+            webSocketClient: webSocketClientRef.current
         }}>
             {alert}
             {children}

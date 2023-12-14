@@ -1,24 +1,12 @@
-import EventTabBar from "../EventTabBar";
-import EventOverview from "../EventOverview";
-import QuestionAnswerSection from "../QuestionAnswerSection";
+import { Outlet } from "react-router-dom";
 
-import useEventOverviewDataManager from "./hooks/useEventOverviewDataManager";
-import useQuestionsAndAnswersDataManager from "./hooks/useQuestionsAndAnswersDataManager";
+import EventTabBar from "../EventTabBar";
 
 import styles from "./Event.module.css";
+import { useEventContext } from "../../contexts/EventContext";
 
 const Event = () => {
-    const {
-        event,
-        loading: eventLoading,
-        error: eventError
-    } = useEventOverviewDataManager();
-
-    const {
-        questions,
-        loading: questionsLoading,
-        error: questionsError
-    } = useQuestionsAndAnswersDataManager();
+    const { event } = useEventContext();
 
     return (
         <section className={styles["event-section"]}>
@@ -26,16 +14,7 @@ const Event = () => {
                 {event.title}
             </h2>
             <EventTabBar />
-            <EventOverview
-                event={event}
-                error={eventError}
-                loading={eventLoading}
-            />
-            <QuestionAnswerSection
-                questions={questions}
-                error={questionsError}
-                loading={questionsLoading}
-            />
+            <Outlet />
         </section>
     );
 };

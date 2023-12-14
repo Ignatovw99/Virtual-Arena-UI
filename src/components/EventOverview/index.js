@@ -1,1 +1,1 @@
-export { default } from "./EventOverview";
+export { default, EventOverviewWithData } from "./EventOverview";

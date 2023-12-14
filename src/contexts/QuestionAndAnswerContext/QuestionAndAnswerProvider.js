@@ -1,32 +1,20 @@
 import { useState, useReducer, useEffect } from "react";
 
-import useQuestionApi from "../../../hooks/useQuestionApi";
-import useUserApi from "../../../hooks/useUserApi";
-import useQuestionLikeApi from "../../../hooks/useQuestionLikeApi";
-import useQuestionWebSocket from "../../../hooks/websocket/useQuestionWebSocket";
+import { QuestionAndAnswerContext } from "./QuestionAndAnswerContext";
 
-import { useEventContext } from "../../../contexts/EventContext";
-import { useWebSocketConnectionContext } from "../../../contexts/WebSocketConnectionContext";
+import useQuestionApi from "../../hooks/api/useQuestionApi";
+import useUserApi from "../../hooks/api/useUserApi";
+import useQuestionLikeApi from "../../hooks/api/useQuestionLikeApi";
+import useQuestionWebSocket from "../../hooks/websocket/useQuestionWebSocket";
 
-const QUESTIONS_ACTION_TYPE = {
-    initializeQuestions: "INITIALIZE_QUESTIONS",
-    addQuestion: "ADD_QUESTION",
-};
+import { useEventContext } from "../EventContext";
+import { useWebSocketConnectionContext } from "../WebSocketConnectionContext";
 
-const QUESTIONS_REDUCER_HANDLERS = {
-    INITIALIZE_QUESTIONS: (state, action) => [...action.payload],
-    ADD_QUESTION: (state, action) => [action.payload, ...state]
-};
+import { QUESTIONS_ACTION_TYPE, questionsReducer } from "./questionsReducer";
 
-const questionsReducer = (state, action) => {
-    const questionsReducerHandler = QUESTIONS_REDUCER_HANDLERS[action.type];
-    if (!questionsReducerHandler) {
-        return state;
-    }
-    return questionsReducerHandler(state, action);
-};
-
-const useQuestionsAndAnswersDataManager = () => {
+export const QuestionAndAnswerProvider = ({
+    children
+}) => {
     const [questions, dispatchQuestions] = useReducer(questionsReducer, []);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -38,15 +26,15 @@ const useQuestionsAndAnswersDataManager = () => {
     const { getQuestionLikes } = useQuestionLikeApi();
 
     const { webSocketClient } = useWebSocketConnectionContext();
-    const { subscribeForEventQuestion } = useQuestionWebSocket(webSocketClient);
+    const { subscribeForEventQuestion, subscribeForQuestionLike } = useQuestionWebSocket(webSocketClient);
 
     useEffect(() => {
-        setupQuestionsAndAnswersDataManager();
+        setupQuestionAndAnswerContextProvider();
 
         // eslint-disable-next-line
     }, []);
 
-    const setupQuestionsAndAnswersDataManager = async () => {
+    const setupQuestionAndAnswerContextProvider = async () => {
         try {
             const eventQuestions = await getEventQuestions(7);
             const questionsData = await Promise.all(
@@ -67,13 +55,9 @@ const useQuestionsAndAnswersDataManager = () => {
         return createDetailedQuestion(question, likes);
     };
 
-    const handleNewQuestion = async (question) => {
-        const newQuestion = createDetailedQuestion(question, []);
-        addQuestion(newQuestion);
-    };
-
     const createDetailedQuestion = async (question, likes) => {
         const sender = await getSenderData(question.senderId);
+        subscribeForQuestionLike(question.eventId, question.id, likeQuestion)
         return {
             ...question,
             sender,
@@ -103,7 +87,26 @@ const useQuestionsAndAnswersDataManager = () => {
         });
     };
 
-    return { questions, loading, error };
-};
+    const likeQuestion = async (like) => {
+        dispatchQuestions({
+            type: QUESTIONS_ACTION_TYPE.likeQuestion,
+            payload: like
+        });
+    };
 
-export default useQuestionsAndAnswersDataManager;
+    const handleNewQuestion = async (question) => {
+        const newQuestion = await createDetailedQuestion(question, []);
+        addQuestion(newQuestion);
+    };
+
+    return (
+        <QuestionAndAnswerContext.Provider value={{
+            questions,
+            loading,
+            error,
+            likeQuestion
+        }}>
+            {children}
+        </QuestionAndAnswerContext.Provider>
+    );
+};

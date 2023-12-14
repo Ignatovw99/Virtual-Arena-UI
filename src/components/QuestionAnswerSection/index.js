@@ -1,1 +1,1 @@
-export { default } from "./QuestionAnswerSection";
+export { default, QuestionAnswerSectionWithData } from "./QuestionAnswerSection";

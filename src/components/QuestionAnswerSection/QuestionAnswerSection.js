@@ -4,6 +4,7 @@ import AskQuestion from "../AskQuestion";
 import { ErrorAlert } from "../Alert";
 
 import { useAlertOnce } from "../../hooks/useAlert";
+import { useQuestionAndAnswerContext } from "../../contexts/QuestionAndAnswerContext";
 
 import styles from "./QuestionAnswerSection.module.css";
 
@@ -37,5 +38,22 @@ const QuestionAnswerSection = ({
         </>
     );
 };
+
+const withQuestionAndAnswerData = (WrapperComponent) => {
+    return (props) => {
+        const { questions, loading, error } = useQuestionAndAnswerContext();
+
+        return (
+            <WrapperComponent
+                questions={questions}
+                error={error}
+                loading={loading}
+                {...props}
+            />
+        );
+    };
+};
+
+export const QuestionAnswerSectionWithData = withQuestionAndAnswerData(QuestionAnswerSection);
 
 export default QuestionAnswerSection;

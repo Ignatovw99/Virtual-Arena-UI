@@ -99,4 +99,21 @@ const EventOverview = ({
     );
 };
 
+const withEventData = (WrapperComponent) => {
+    return (props) => {
+        const { event, loading, error } = useEventContext();
+
+        return (
+            <WrapperComponent
+                event={event}
+                error={error}
+                loading={loading}
+                {...props}
+            />
+        );
+    };
+};
+
+export const EventOverviewWithData = withEventData(EventOverview);
+
 export default EventOverview;
