@@ -9,6 +9,8 @@ import { UserProvider } from "./contexts/UserContext";
 import styles from "./App.module.css";
 import UpdateUserProfile from "./components/UpdateUserProfile";
 import OrganizeEvent from "./components/OrganizeEvent/OrganizeEvent";
+import { WebSocketConnectionProvider } from "./contexts/WebSocketConnectionContext";
+import { EventContextProvider } from "./contexts/EventContext";
 
 function App() {
     return (
@@ -17,9 +19,13 @@ function App() {
             <div className={styles["app-body"]}>
                 <Banner />
                 <EventsCatalog />
-                <Event />
                 <UpdateUserProfile />
                 <OrganizeEvent />
+                <WebSocketConnectionProvider>
+                    <EventContextProvider>
+                        <Event />
+                    </EventContextProvider>
+                </WebSocketConnectionProvider>
             </div>
             <Footer />
         </UserProvider>

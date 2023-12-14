@@ -3,17 +3,16 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { ErrorAlert } from "../../components/Alert";
-import useUserApi from "../../hooks/useUserApi";
-import { useAlert } from "../../hooks/useAlert";
+
+import useUserApi from "../../hooks/api/useUserApi";
 
 const useAuthenticatedUserApi = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const { isAuthenticated, isLoading: isAuthLoading, getIdTokenClaims } = useAuth0();
-    const { getUserProfile, createUserProfile } = useUserApi({
-        throwError: true
+    const { getUserProfile, createUserProfile, alert, showAlert } = useUserApi({
+        includeAlert: true
     });
-    const { alert, showAlert } = useAlert();
 
     useEffect(() => {
         if (isAuthLoading) {

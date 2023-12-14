@@ -21,6 +21,24 @@ export const useAlert = () => {
     return { alert, showAlert };
 };
 
+export const useAlertOnce = () => {
+    const { alert, showAlert } = useAlert();
+    const [shownAlert, setShownAlert] = useState(false);
+
+    const showAlertOnce = (AlertComponent, message) => {
+        if (shownAlert) {
+            return;
+        }
+        showAlert(AlertComponent, message);
+        setShownAlert(true);
+    };
+
+    return {
+        alert,
+        showAlert: showAlertOnce
+    };
+};
+
 export const useAlertConditionally = (includeAlert) => {
     const { alert, showAlert } = useAlert();
     return includeAlert ?

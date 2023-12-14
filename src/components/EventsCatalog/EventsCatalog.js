@@ -2,33 +2,36 @@ import { useState, useEffect } from "react";
 
 import EventItem from "../EventItem";
 import LoadingSpinner from "../LoadingSpinner";
-import useEventDetailsApi from "../../hooks/useEventDetailsApi";
+import { ErrorAlert } from "../Alert";
+
+import useEventDetailsApi from "../../hooks/api/useEventDetailsApi";
 import { useAlert } from "../../hooks/useAlert";
 
 import styles from "./EventsCatalog.module.css";
 
 const EventsCatalog = () => {
     const [events, setEvents] = useState([]);
-    const { getAllEventsDetails, loading } = useEventDetailsApi();
+    const { getAllEventsDetails, loading } = useEventDetailsApi({ initalLoading: true });
     const { alert, showAlert } = useAlert();
 
     useEffect(() => {
         loadEventsDetails();
+
         // eslint-disable-next-line
     }, []);
-
-    if (loading) {
-        return <LoadingSpinner />;
-    }
 
     const loadEventsDetails = async () => {
         try {
             const eventsDetails = await getAllEventsDetails();
             setEvents(eventsDetails);
         } catch (error) {
-            showAlert(ErrorEvent, error.message);
+            showAlert(ErrorAlert, error.message);
         }
     };
+
+    if (loading) {
+        return <LoadingSpinner />;
+    }
 
     return (
         <>

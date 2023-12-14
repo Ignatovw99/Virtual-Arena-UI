@@ -1,8 +1,8 @@
-import useHttpRequest from "./useHttpRequest";
-import { getRequestUrl } from "../utils/request";
+import useHttpRequest from "../useHttpRequest";
+import { getRequestUrl } from "../../utils/request";
 
-import { API_BASE_URL, USER_PROFILE_URL } from "../constants/api";
-import { POST_METHOD, PUT_METHOD } from "../constants/request";
+import { API_BASE_URL, USER_PROFILE_URL } from "../../constants/api";
+import { POST_METHOD, PUT_METHOD } from "../../constants/request";
 
 const requestUrl = getRequestUrl(API_BASE_URL, USER_PROFILE_URL);
 
