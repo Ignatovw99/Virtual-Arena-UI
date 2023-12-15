@@ -1,2 +1,2 @@
-export { QuestionAndAnswerProvider } from "./QuestionAndAnswerProvider";
-export { useQuestionAndAnswerContext } from "./hooks/useQuestionAndAnswerContext";
+export { default as QuestionAndAnswerProvider } from "./QuestionAndAnswerProvider";
+export { default as useQuestionAndAnswerContext } from "./hooks/useQuestionAndAnswerContext";

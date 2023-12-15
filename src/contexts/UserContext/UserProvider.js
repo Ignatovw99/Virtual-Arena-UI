@@ -1,21 +1,8 @@
-import { createContext, useContext } from "react";
-
-import LoadingSpinner from "../components/LoadingSpinner";
+import UserContext from "./UserContext";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import useAuthenticatedUserApi from "./hooks/useAuthenticatedUserApi";
 
-import { CONTEXT_NOT_FOUND } from "../constants/common";
-
-export const UserContext = createContext();
-
-export const useUserContext = () => {
-    const context = useContext(UserContext);
-    if (!context) {
-        throw new Error(CONTEXT_NOT_FOUND);
-    }
-    return context;
-};
-
-export const UserProvider = ({
+const UserProvider = ({
     children
 }) => {
     const { user, loading, alert } = useAuthenticatedUserApi();
@@ -34,3 +21,5 @@ export const UserProvider = ({
         </UserContext.Provider>
     );
 };
+
+export default UserProvider;

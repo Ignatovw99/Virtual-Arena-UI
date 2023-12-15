@@ -1,2 +1,2 @@
-export { EventContextProvider } from "./EventContextProvider";
-export { useEventContext } from "./hooks/useEventContext";
+export { default as EventContextProvider } from "./EventContextProvider";
+export { default as useEventContext } from "./hooks/useEventContext";

@@ -1,6 +1,6 @@
 import { useState, useReducer, useEffect } from "react";
 
-import { QuestionAndAnswerContext } from "./QuestionAndAnswerContext";
+import QuestionAndAnswerContext from "./QuestionAndAnswerContext";
 
 import useQuestionApi from "../../hooks/api/useQuestionApi";
 import useUserApi from "../../hooks/api/useUserApi";
@@ -12,7 +12,7 @@ import { useWebSocketConnectionContext } from "../WebSocketConnectionContext";
 
 import { QUESTIONS_ACTION_TYPE, questionsReducer } from "./questionsReducer";
 
-export const QuestionAndAnswerProvider = ({
+const QuestionAndAnswerProvider = ({
     children
 }) => {
     const [questions, dispatchQuestions] = useReducer(questionsReducer, []);
@@ -110,3 +110,5 @@ export const QuestionAndAnswerProvider = ({
         </QuestionAndAnswerContext.Provider>
     );
 };
+
+export default QuestionAndAnswerProvider;

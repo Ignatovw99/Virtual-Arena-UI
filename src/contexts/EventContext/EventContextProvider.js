@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 
-import { EventContext } from "./EventContext";
+import EventContext from "./EventContext";
 
 import useEventDetailsApi from "../../hooks/api/useEventDetailsApi";
 import useEventParticipantsApi from "../../hooks/api/useEventParticipantsApi";
 import useEventParticipantsWebSocket from "../../hooks/websocket/useEventParticipantsWebSocket";
 import { useWebSocketConnectionContext } from "../WebSocketConnectionContext";
 
-export const EventContextProvider = ({
+const EventContextProvider = ({
     children
 }) => {
     const [event, setEvent] = useState({});
@@ -53,3 +53,5 @@ export const EventContextProvider = ({
         </EventContext.Provider>
     );
 };
+
+export default EventContextProvider;

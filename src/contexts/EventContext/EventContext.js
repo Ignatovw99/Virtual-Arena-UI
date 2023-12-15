@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const EventContext = createContext();
+const EventContext = createContext();
+
+export default EventContext;

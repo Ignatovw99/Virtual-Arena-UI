@@ -1,15 +1,15 @@
 import { useContext } from "react";
 
-import EventContext from "../EventContext";
+import UserContext from "../UserContext";
 
 import { CONTEXT_NOT_FOUND } from "../../../constants/common";
 
-const useEventContext = () => {
-    const context = useContext(EventContext);
+const useUserContext = () => {
+    const context = useContext(UserContext);
     if (!context) {
         throw new Error(CONTEXT_NOT_FOUND);
     }
     return context;
 };
 
-export default useEventContext;
+export default useUserContext;
