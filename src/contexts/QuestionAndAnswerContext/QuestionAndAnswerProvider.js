@@ -1,4 +1,5 @@
 import { useState, useReducer, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import QuestionAndAnswerContext from "./QuestionAndAnswerContext";
 
@@ -19,6 +20,7 @@ const QuestionAndAnswerProvider = ({
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const { eventId } = useParams();
     const { participants } = useEventContext();
 
     const { getEventQuestions } = useQuestionApi();
@@ -36,13 +38,13 @@ const QuestionAndAnswerProvider = ({
 
     const setupQuestionAndAnswerContextProvider = async () => {
         try {
-            const eventQuestions = await getEventQuestions(7);
+            const eventQuestions = await getEventQuestions(eventId);
             const questionsData = await Promise.all(
                 eventQuestions.map(fetchQuestionDetailedData)
             );
             initializeQuestions(questionsData);
 
-            subscribeForEventQuestion(7, handleNewQuestion);
+            subscribeForEventQuestion(eventId, handleNewQuestion);
         } catch (error) {
             setError(error.message);
         } finally {
