@@ -7,6 +7,7 @@ import { SuccessAlert, ErrorAlert } from "../Alert";
 
 import { useUserContext } from "../../contexts/UserContext";
 import { useAlert } from "../../hooks/useAlert";
+import useNavigateAfterShowingAlert from "../../hooks/useNavigateAfterShowingAlert";
 import useUserApi from "../../hooks/api/useUserApi";
 
 import { changeStateValueHandler, createFormData, createEmptyFile } from "../../utils/request";
@@ -35,6 +36,7 @@ const UpdateUserProfile = () => {
         includeLoading: true
     });
     const { alert, showAlert } = useAlert();
+    const navigateAfterShowingAlert = useNavigateAfterShowingAlert(alert);
 
     const updateUserHandler = async (event) => {
         event.preventDefault();
@@ -49,6 +51,7 @@ const UpdateUserProfile = () => {
         try {
             await updateUserProfile(formData);
             showAlert(SuccessAlert, USER_UPDATED_SUCCESSFULLY);
+            navigateAfterShowingAlert("/profile");
         } catch (errorResponse) {
             showAlert(ErrorAlert, errorResponse.message);
         }

@@ -6,6 +6,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import { SuccessAlert, ErrorAlert } from "../Alert";
 
 import useEventApi from "../../hooks/api/useEventApi";
+import useNavigateAfterShowingAlert from "../../hooks/useNavigateAfterShowingAlert";
 
 import { changeStateValueHandler, createFormData } from "../../utils/request";
 
@@ -41,14 +42,16 @@ const OrganizeEvent = () => {
         includeLoading: true,
         includeAlert: true
     });
+    const navigateAfterShowingAlert = useNavigateAfterShowingAlert(alert);
 
     const organizeEventHandler = async (e) => {
         e.preventDefault();
         const eventFormData = createFormData(event);
 
         try {
-            await createEvent(eventFormData);
+            const event = await createEvent(eventFormData);
             showAlert(SuccessAlert, EVENT_ORGANIZED_SUCCESSFULLY);
+            navigateAfterShowingAlert(`/events/${event.id}/overview`);
         } catch (errorResponse) {
             showAlert(ErrorAlert, errorResponse.message);
         }
