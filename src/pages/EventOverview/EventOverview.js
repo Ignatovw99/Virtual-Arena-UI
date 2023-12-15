@@ -1,5 +1,5 @@
-import LoadingSpinner from "../LoadingSpinner";
-import { ErrorAlert, SuccessAlert } from "../Alert";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { ErrorAlert, SuccessAlert } from "../../components/Alert";
 
 import { useAlertOnce } from "../../hooks/useAlert";
 import { useEventContext } from "../../contexts/EventContext";

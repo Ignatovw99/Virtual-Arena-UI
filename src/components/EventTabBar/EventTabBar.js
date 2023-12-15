@@ -1,17 +1,26 @@
+import { NavLink, useParams } from "react-router-dom";
+
 import styles from "./EventTabBar.module.css";
 
 const EventTabBar = () => {
+    const { eventId } = useParams();
+
     return (
         <div className={styles["tab-bar"]}>
-            <button className={styles["tab-bar-button"]}>
-                Details
-            </button>
-            <button className={`${styles["tab-bar-button"]} ${styles.selected}`}>
+            <NavLink
+                to={`/events/${eventId}`}
+                end
+                className={({ isActive }) => isActive ? styles.selected : ""}
+            >
+                Overview
+            </NavLink>
+
+            <NavLink
+                to={`/events/${eventId}/questions-and-answers`}
+                className={({ isActive }) => isActive ? styles.selected : ""}
+            >
                 Q&A
-            </button>
-            <button className={styles["tab-bar-button"]}>
-                Polls
-            </button>
+            </NavLink>
         </div>
     );
 };

@@ -1,7 +1,7 @@
-import Question from "../Question";
-import LoadingSpinner from "../LoadingSpinner";
-import AskQuestion from "../AskQuestion";
-import { ErrorAlert } from "../Alert";
+import Question from "../../components/Question";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import AskQuestion from "../../components/AskQuestion";
+import { ErrorAlert } from "../../components/Alert";
 
 import { useAlertOnce } from "../../hooks/useAlert";
 import { useQuestionAndAnswerContext } from "../../contexts/QuestionAndAnswerContext";

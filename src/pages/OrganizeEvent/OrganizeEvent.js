@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import Form from "../Form";
-import { InputField, ImageField, TextareaField, DropdownField } from "../Field";
-import LoadingSpinner from "../LoadingSpinner";
-import { SuccessAlert, ErrorAlert } from "../Alert";
+import Form from "../../components/Form";
+import { InputField, ImageField, TextareaField, DropdownField } from "../../components/Field";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { SuccessAlert, ErrorAlert } from "../../components/Alert";
 
 import useEventApi from "../../hooks/api/useEventApi";
 import useNavigateAfterShowingAlert from "../../hooks/useNavigateAfterShowingAlert";
@@ -51,7 +51,7 @@ const OrganizeEvent = () => {
         try {
             const event = await createEvent(eventFormData);
             showAlert(SuccessAlert, EVENT_ORGANIZED_SUCCESSFULLY);
-            navigateAfterShowingAlert(`/events/${event.id}/overview`);
+            navigateAfterShowingAlert(`/events/${event.id}`);
         } catch (errorResponse) {
             showAlert(ErrorAlert, errorResponse.message);
         }

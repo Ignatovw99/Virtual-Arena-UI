@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import Form from "../Form";
-import { InputField, ImageField, TextareaField } from "../Field";
-import LoadingSpinner from "../LoadingSpinner";
-import { SuccessAlert, ErrorAlert } from "../Alert";
+import Form from "../../components/Form";
+import { InputField, ImageField, TextareaField } from "../../components/Field";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { SuccessAlert, ErrorAlert } from "../../components/Alert";
 
 import { useUserContext } from "../../contexts/UserContext";
 import { useAlert } from "../../hooks/useAlert";

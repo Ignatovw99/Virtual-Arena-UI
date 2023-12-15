@@ -11,7 +11,7 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6) inset;
 }
 
-.tab-bar-button {
+.tab-bar a {
     font-size: 18px;
     font-weight: 600;
     color: rgb(26, 22, 22);
@@ -21,16 +21,16 @@
     cursor: pointer;
 }
 
-.tab-bar-button:active {
+.tab-bar a:active {
     transform: none;
 }
 
-.tab-bar-button:hover {
+.tab-bar a:hover {
     background: none;
     color: rgb(150, 150, 150)
 }
 
-.tab-bar-button.selected {
+.tab-bar a.selected {
     color: rgb(46, 204, 64);
     border-bottom: 3px solid rgb(46, 204, 64);
     border-radius: 0;
