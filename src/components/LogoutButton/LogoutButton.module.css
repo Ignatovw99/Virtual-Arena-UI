@@ -1,0 +1,15 @@
+.logout {
+    background-color: rgb(184, 0, 0);
+    color: white;
+    padding: inherit;
+    border-radius: 10px;
+    transition: background-color 0.25s ease 0s;
+}
+
+.logout:hover {
+    background-color: rgba(184, 0, 0, 0.7);
+}
+
+.logout:active {
+    transform: translate(2px, 2px);
+}
