@@ -14,7 +14,7 @@ const Footer = () => {
                     >
                         <img
                             className={styles["logo-image"]}
-                            src="virtual-arena-logo.png"
+                            src="/virtual-arena-logo.png"
                             alt="Virtual Arena Logo"
                         />
                     </a>

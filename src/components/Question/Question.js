@@ -19,9 +19,6 @@ const Question = ({
                 likes={question.likes}
                 likePost={() => likeQuestion(question.eventId, question.id)}
             />
-            <button className={styles["show-replies-button"]}>
-                Show Replies
-            </button>
         </div>
     );
 };

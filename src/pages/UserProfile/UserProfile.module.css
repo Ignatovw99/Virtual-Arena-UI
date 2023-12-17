@@ -1,0 +1,92 @@
+.user-profile-section {
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.left-container {
+    width: 35%;
+    background-color: black;
+    background: linear-gradient(to right, rgb(33, 148, 47), rgb(46, 204, 64));
+    padding: 30px 25px;
+    text-align: center;
+    align-self:stretch;
+}
+
+.user-picture {
+    background-color: white;
+    width: 250px;
+    height: 250px;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.left-container h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.right-container {
+    width: 65%;
+    padding: 30px 25px;
+}
+
+.profile-section {
+    margin-bottom: 25px;
+}
+
+.profile-section-title {
+    margin-bottom: 15px;
+    margin-top: 5px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    color: rgb(53, 60, 78);
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.info-data-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-data {
+    width: 0.5fr;
+}
+
+.info-data h4 {
+    color: rgb(53, 60, 78);
+    margin-bottom: 5px;
+}
+
+.info-data p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: rgb(123, 131, 139);
+}
+
+.bio {
+    font-size: 14px;
+    color: rgb(123, 131, 139);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-buttons button {
+    margin-right: 30px;
+}

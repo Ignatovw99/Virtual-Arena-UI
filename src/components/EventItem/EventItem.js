@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 import { formatDate } from "../../utils";
 import { getEventImageUrl, getEventCategoryLabel } from "../../utils/event";
 
 import styles from "./EventItem.module.css";
 
 const EventItem = ({
+    id,
     title,
     imageUrl,
     organizer,
@@ -11,8 +14,13 @@ const EventItem = ({
     startDateTime,
     description
 }) => {
+    const navigate = useNavigate();
+
     return (
-        <div className={styles.event}>
+        <div
+            className={styles.event}
+            onClick={() => navigate(`/events/${id}`)}
+        >
             <img
                 className={styles.image}
                 src={getEventImageUrl(imageUrl)}
@@ -42,7 +50,7 @@ const EventItem = ({
                 </div>
                 <div className={styles["description-container"]}>
                     <p className={`${styles.description} ${styles["text-truncation"]}`}>
-                        {description}    
+                        {description}
                     </p>
                 </div>
             </div>

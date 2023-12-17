@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -12,11 +13,12 @@ import styles from "./AskQuestion.module.css";
 
 const AskQuestion = () => {
     const [active, setActive] = useState(false);
+    const { eventId } = useParams();
 
     const { webSocketClient } = useWebSocketConnectionContext();
     const { sendQuestion } = useQuestionWebSocket(webSocketClient);
 
-    const askQuestion = (content) => sendQuestion(7, content);
+    const askQuestion = (content) => sendQuestion(eventId, content);
 
     return (
         <div className={styles["ask-question-container"]}>

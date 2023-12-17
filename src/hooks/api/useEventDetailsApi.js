@@ -5,13 +5,15 @@ import useUserApi from "./useUserApi";
 
 const useEventDetailsApi = (requestConfiguration = {}) => {
     const [loading, setLoading] = useState(requestConfiguration.initalLoading || false);
-    const { getAllEvents, getEventById } = useEventApi();
+    const { getAllEvents, getAllUserEvents, getEventById } = useEventApi();
     const { getUserProfileById } = useUserApi();
 
-    const getAllEventsDetails = async () => {
+    const getAllEventsDetails = async (userId) => {
         try {
             setLoading(true);
-            const events = await getAllEvents();
+            const events = userId ?
+                await getAllUserEvents(userId) :
+                await getAllEvents();
             const organizers = await Promise.all(
                 events.map(event => getUserProfileById(event.organizerId))
             );

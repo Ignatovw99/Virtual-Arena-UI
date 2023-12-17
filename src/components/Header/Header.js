@@ -1,59 +1,65 @@
+import { NavLink } from "react-router-dom";
+
+import LoginButton from "../LoginButton";
+import HeaderProfile from "./HeaderProfile";
+
+import { useUserContext } from "../../contexts/UserContext";
+
 import styles from "./Header.module.css";
 
 const Header = () => {
+    const { user, isAuthenticated } = useUserContext();
+
     return (
         <header>
             <div className={styles["logo-container"]}>
-                <a
+                <NavLink
+                    to="/"
                     className={styles["logo-link"]}
-                    href="/"
                 >
                     <img
                         className={styles["logo-image"]}
-                        src="virtual-arena-logo.png"
+                        src="/virtual-arena-logo.png"
                         alt="Virtual Arena Logo"
                     />
-                </a>
+                </NavLink>
             </div>
             <nav>
                 <ul className={styles["navigation-links"]}>
                     <li>
-                        <a href="/events">Events</a>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) => isActive ? styles.selected : ""}
+                        >
+                            Events
+                        </NavLink>
                     </li>
-                    <li>
-                        <a href="/my-events">My Events</a>
-                    </li>
-                    <li>
-                        <a href="/event-create">Create Event</a>
-                    </li>
+                    {isAuthenticated &&
+                        <>
+                            <li>
+                                <NavLink
+                                    to="/my-events"
+                                    className={({ isActive }) => isActive ? styles.selected : ""}
+                                >
+                                    My Events
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/events-organize"
+                                    className={({ isActive }) => isActive ? styles.selected : ""}
+                                >
+                                    Organize Event
+                                </NavLink>
+                            </li>
+                        </>
+                    }
                 </ul>
             </nav>
-            <div className={styles["profile-container"]}>
-                <img
-                    className={styles["profile-image"]}
-                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                    alt="Profile"
-                />
-                <div className={styles["profile-details"]}>
-                    <p className={styles["profile-name"]}>
-                        Lyuboslav Ignatov
-                    </p>
-                    <div className={styles["profile-actions-container"]}>
-                        <a
-                            className={styles["profile-link"]}
-                            href="/my-profile"
-                        >
-                            My Profile
-                        </a>
-                        <a
-                            className={styles.logout}
-                            href="/my-profile"
-                        >
-                            Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {isAuthenticated ?
+                <HeaderProfile user={user} /> :
+                <LoginButton />
+            }
         </header>
     );
 };

@@ -1,0 +1,14 @@
+.login {
+    background-color: rgb(46, 204, 64);
+    color: white;
+    padding: 10px 30px;
+    transition: background-color 0.25s ease 0s;
+}
+
+.login:hover {
+    background-color: rgba(46, 204, 64, 0.7);
+}
+
+.login:active {
+    transform: translate(2px, 2px);
+}

@@ -1,4 +1,4 @@
-import Message from "../Message";
+import Post from "../Post";
 
 import styles from "./RepliesCollection.module.css";
 
@@ -9,10 +9,10 @@ const RepliesCollection = () => {
                 Replies
             </p>
             <div className={styles["reply-container"]}>
-                <Message />
+                <Post />
             </div>
             <div className={styles["reply-container"]}>
-                <Message />
+                <Post />
             </div>
         </div>
     );
