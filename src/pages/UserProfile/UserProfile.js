@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 import { useUserContext } from "../../contexts/UserContext";
 
 import styles from "./UserProfile.module.css"
 
 const UserProfile = () => {
     const { user, isAuthenticated } = useUserContext();
+    const navigate = useNavigate();
 
     if (!isAuthenticated) {
         return;
@@ -56,7 +59,7 @@ const UserProfile = () => {
                         Taskbar
                     </h3>
                     <div className={styles["action-buttons"]}>
-                        <button>
+                        <button onClick={() => navigate("/profile-update")}>
                             Update
                         </button>
                     </div>

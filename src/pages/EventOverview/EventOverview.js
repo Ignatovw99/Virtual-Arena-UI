@@ -1,6 +1,8 @@
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { ErrorAlert, SuccessAlert } from "../../components/Alert";
 
+import EventParticipantChecker from "../../security/EventParticipantChecker";
+
 import { useAlertOnce } from "../../hooks/useAlert";
 import { useEventContext } from "../../contexts/EventContext";
 import useEventParticipantsApi from "../../hooks/api/useEventParticipantsApi";
@@ -89,11 +91,15 @@ const EventOverview = ({
                         </p>
                     </div>
                 </div>
-                <div className={styles["event-buttons-container"]}>
-                    <button onClick={handleSignUpForEvent}>
-                        Sign Up
-                    </button>
-                </div>
+                <EventParticipantChecker
+                    negate={true}
+                >
+                    <div className={styles["event-buttons-container"]}>
+                        <button onClick={handleSignUpForEvent}>
+                            Sign Up
+                        </button>
+                    </div>
+                </EventParticipantChecker>
             </div>
         </>
     );

@@ -21,7 +21,7 @@ const QuestionAndAnswerProvider = ({
     const [error, setError] = useState(null);
 
     const { eventId } = useParams();
-    const { participants } = useEventContext();
+    const { participants, organizer, loading: eventLoading } = useEventContext();
 
     const { getEventQuestions } = useQuestionApi();
     const { getUserProfileById } = useUserApi();
@@ -34,9 +34,13 @@ const QuestionAndAnswerProvider = ({
         setupQuestionAndAnswerContextProvider();
 
         // eslint-disable-next-line
-    }, []);
+    }, [eventLoading]);
 
     const setupQuestionAndAnswerContextProvider = async () => {
+        if (eventLoading) {
+            return;
+        }
+        // TODO: do not subscribe if the user is not participant in the event
         try {
             const eventQuestions = await getEventQuestions(eventId);
             const questionsData = await Promise.all(
@@ -68,6 +72,9 @@ const QuestionAndAnswerProvider = ({
     };
 
     const getSenderData = (senderId) => {
+        if (organizer.id === senderId) {
+            return organizer;
+        }
         const sender = participants.find(participant => participant.id === senderId);
         if (sender) {
             return sender;

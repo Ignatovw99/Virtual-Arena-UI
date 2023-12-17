@@ -9,7 +9,9 @@ import { useAlert } from "../../hooks/useAlert";
 
 import styles from "./EventsCatalog.module.css";
 
-const EventsCatalog = () => {
+const EventsCatalog = ({
+    userId
+}) => {
     const [events, setEvents] = useState([]);
     const { getAllEventsDetails, loading } = useEventDetailsApi({ initalLoading: true });
     const { alert, showAlert } = useAlert();
@@ -22,7 +24,7 @@ const EventsCatalog = () => {
 
     const loadEventsDetails = async () => {
         try {
-            const eventsDetails = await getAllEventsDetails();
+            const eventsDetails = await getAllEventsDetails(userId);
             setEvents(eventsDetails);
         } catch (error) {
             showAlert(ErrorAlert, error.message);

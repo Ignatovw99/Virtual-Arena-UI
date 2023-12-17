@@ -4,9 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Auth0Provider } from "@auth0/auth0-react";
 
+import { UserProvider } from "./contexts/UserContext";
 import App from './App';
 
 import authConfig from "./config/authConfig";
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,7 +26,9 @@ root.render(
                 useRefreshTokens={true}
                 useRefreshTokensFallback={true}
             >
-                <App />
+                <UserProvider>
+                    <App />
+                </UserProvider>
             </Auth0Provider>
         </BrowserRouter>
     </React.StrictMode>

@@ -5,7 +5,7 @@ import useAuthenticatedUserApi from "./hooks/useAuthenticatedUserApi";
 const UserProvider = ({
     children
 }) => {
-    const { user, loading, alert } = useAuthenticatedUserApi();
+    const { user, isAuthenticated, setUser, loading, alert } = useAuthenticatedUserApi();
 
     if (loading) {
         return <LoadingSpinner />;
@@ -13,8 +13,9 @@ const UserProvider = ({
 
     return (
         <UserContext.Provider value={{
-            user,
-            isAuthenticated: !!user
+            user: isAuthenticated ? user : null,
+            isAuthenticated,
+            updateUser: (user) => setUser(user)
         }}>
             {alert}
             {children}

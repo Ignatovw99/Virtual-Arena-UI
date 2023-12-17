@@ -5,6 +5,8 @@ import EventContext from "./EventContext";
 
 import useEventDetailsApi from "../../hooks/api/useEventDetailsApi";
 import useEventParticipantsApi from "../../hooks/api/useEventParticipantsApi";
+import useUserApi from "../../hooks/api/useUserApi";
+
 import useEventParticipantsWebSocket from "../../hooks/websocket/useEventParticipantsWebSocket";
 import { useWebSocketConnectionContext } from "../WebSocketConnectionContext";
 
@@ -13,12 +15,14 @@ const EventContextProvider = ({
 }) => {
     const [event, setEvent] = useState({});
     const [participants, setParticipants] = useState([]);
+    const [organizer, setOrganizer] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const { eventId } = useParams();
 
     const { getEventDetails } = useEventDetailsApi();
+    const { getUserProfileById } = useUserApi();
     const { getAllEventParticipants } = useEventParticipantsApi();
 
     const { webSocketClient } = useWebSocketConnectionContext();
@@ -31,7 +35,9 @@ const EventContextProvider = ({
                 setParticipants(participants);
 
                 subscribeForEventParticipant(eventId, addEventParticipant);
+                return getUserProfileById(event.organizerId);
             })
+            .then(organizer => setOrganizer(organizer))
             .catch(error => {
                 setError(error.message);
             })
@@ -46,6 +52,7 @@ const EventContextProvider = ({
         <EventContext.Provider value={{
             event,
             participants,
+            organizer,
             loading,
             error
         }}>

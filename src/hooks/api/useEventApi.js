@@ -14,6 +14,12 @@ const useEventApi = (requestConfiguration) => {
         return response.json();
     };
 
+    const getAllUserEvents = async (userId) => {
+        const url = `${requestUrl}?userId=${userId}`;
+        const response = await request(url);
+        return response.json();
+    };
+
     const getEventById = async (id) => {
         const url = `${requestUrl}/${id}`;
         const response = await request(url);
@@ -31,6 +37,7 @@ const useEventApi = (requestConfiguration) => {
 
     return {
         getAllEvents,
+        getAllUserEvents,
         getEventById,
         createEvent,
         loading,

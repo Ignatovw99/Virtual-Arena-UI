@@ -51,7 +51,7 @@ const useAuthenticatedUserApi = () => {
         }
     };
 
-    return { user, loading, alert };
+    return { user, isAuthenticated, setUser, loading, alert };
 };
 
 export default useAuthenticatedUserApi;

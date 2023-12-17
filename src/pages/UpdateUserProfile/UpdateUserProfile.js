@@ -29,7 +29,7 @@ import {
 } from "./constants";
 
 const UpdateUserProfile = () => {
-    const { user: authenticatedUser } = useUserContext();
+    const { user: authenticatedUser, updateUser } = useUserContext();
     const [user, setUser] = useState({ ...authenticatedUser });
     const [pictureFile, setPictureFile] = useState(null);
     const { updateUserProfile, loading } = useUserApi({
@@ -49,7 +49,8 @@ const UpdateUserProfile = () => {
         formData.append("pictureFile", pictureToSent);
 
         try {
-            await updateUserProfile(formData);
+            const updatedUser = await updateUserProfile(formData);
+            updateUser(updatedUser);
             showAlert(SuccessAlert, USER_UPDATED_SUCCESSFULLY);
             navigateAfterShowingAlert("/profile");
         } catch (errorResponse) {

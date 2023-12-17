@@ -13,6 +13,11 @@ const CreatePost = ({
 
         const { content } = Object.fromEntries(new FormData(e.target));
         createPost(content);
+
+        const field = e.target.querySelector('textarea');
+        if (field) {
+            field.value = "";
+        }
     };
 
     return (
