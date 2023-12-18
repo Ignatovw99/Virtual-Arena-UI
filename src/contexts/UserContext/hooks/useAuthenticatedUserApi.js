@@ -43,7 +43,7 @@ const useAuthenticatedUserApi = () => {
             const userProfile = await getUserProfile();
             setUser(userProfile);
         } catch {
-            const createdUser = createNewUserProfile();
+            const createdUser = await createNewUserProfile();
             if (!createdUser) {
                 return;
             }
