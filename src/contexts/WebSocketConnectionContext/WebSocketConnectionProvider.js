@@ -9,7 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { ErrorAlert } from "../../components/Alert";
 import { useAlert } from "../../hooks/useAlert";
 
-const WS_SERVER_URL = "http://localhost:8080/websocket";
+const WS_SERVER_URL = process.env.REACT_APP_WEBSOCKET_SERVER_URL;
 const WS_AUTHORIZATION_HEADER = "X-Authorization";
 const WS_CONNECTION_INTERRUPTED = "WebSocket connection interrupted";
 
