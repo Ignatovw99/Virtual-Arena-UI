@@ -5,6 +5,7 @@ import UserProfile from "./pages/UserProfile";
 import UpdateUserProfile from "./pages/UpdateUserProfile";
 import UserEvents from "./pages/UserEvents/UserEvents";
 import OrganizeEvent from "./pages/OrganizeEvent/OrganizeEvent";
+import NotFound from "./pages/NotFound";
 import { EventOverviewWithData } from "./pages/EventOverview";
 import { QuestionAnswerSectionWithData } from "./pages/QuestionAnswerSection";
 
@@ -32,6 +33,7 @@ const AppRoutes = () => {
                     } />
                 </Route>
             </Route>
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 };
