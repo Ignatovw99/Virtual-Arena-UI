@@ -1,6 +1,7 @@
 import { useWebSocketConnectionContext } from "../../contexts/WebSocketConnectionContext";
 import useQuestionWebSocket from "../../hooks/websocket/useQuestionWebSocket";
 import Post from "../Post";
+import ReplyButton from "../ReplyButton";
 
 import styles from "./Question.module.css";
 
@@ -19,6 +20,7 @@ const Question = ({
                 likes={question.likes}
                 likePost={() => likeQuestion(question.eventId, question.id)}
             />
+            <ReplyButton />
         </div>
     );
 };
