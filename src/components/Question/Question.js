@@ -21,7 +21,10 @@ const Question = ({
                 likes={question.likes}
                 likePost={() => likeQuestion(question.eventId, question.id)}
             />
-            <RepliesContainer replies={question.replies} />
+            <RepliesContainer
+                replies={question.replies}
+                question={question}
+            />
         </div>
     );
 };

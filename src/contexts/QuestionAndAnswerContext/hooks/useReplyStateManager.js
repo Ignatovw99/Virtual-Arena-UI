@@ -2,7 +2,9 @@ import useReplyApi from "../../../hooks/api/useReplyApi";
 
 import { useEventContext } from "../../EventContext";
 
-const useReplyStateManager = () => {
+import { QUESTIONS_ACTION_TYPE } from "../questionsReducer";
+
+const useReplyStateManager = (dispatchQuestions) => {
     const { getQuestionReplies } = useReplyApi();
 
     const { getSenderData } = useEventContext();
@@ -26,7 +28,22 @@ const useReplyStateManager = () => {
         };
     };
 
-    return { fetchQuestionReplies };
+    const handleNewReply = async (reply) => {
+        const newReply = await createReply(reply);
+        addQuestionReply(newReply);
+    };
+
+    const addQuestionReply = async (reply) => {
+        dispatchQuestions({
+            type: QUESTIONS_ACTION_TYPE.addReply,
+            payload: reply
+        });
+    };
+
+    return {
+        fetchQuestionReplies,
+        handleNewReply
+    };
 };
 
 export default useReplyStateManager;

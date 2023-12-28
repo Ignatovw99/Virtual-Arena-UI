@@ -5,8 +5,12 @@ import styles from "./ReplyList.module.css";
 const ReplyList = ({
     replies
 }) => {
+    if (!replies || replies.length === 0) {
+        return null;
+    }
+
     return (
-        <div className={styles["replies-list-container"]}>
+        <div className={styles["replies-list"]}>
             <p className={styles["replies-title"]}>
                 Replies
             </p>

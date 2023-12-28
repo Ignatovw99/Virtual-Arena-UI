@@ -15,7 +15,7 @@ import { QUESTIONS_ACTION_TYPE, questionsReducer } from "../questionsReducer";
 const useQuestionStateManager = () => {
     const [questions, dispatchQuestions] = useReducer(questionsReducer, []);
 
-    const { fetchQuestionReplies } = useReplyStateManager();
+    const { fetchQuestionReplies, handleNewReply } = useReplyStateManager(dispatchQuestions);
 
     const { eventId } = useParams();
 
@@ -48,7 +48,7 @@ const useQuestionStateManager = () => {
         const sender = await getSenderData(question.senderId);
 
         subscribeForQuestionLike(question.eventId, question.id, likeQuestion);
-        subscribeForQuestionReply(question.eventId, question.id, addQuestionReply);
+        subscribeForQuestionReply(question.eventId, question.id, handleNewReply);
 
         return {
             ...question,
@@ -76,13 +76,6 @@ const useQuestionStateManager = () => {
         dispatchQuestions({
             type: QUESTIONS_ACTION_TYPE.likeQuestion,
             payload: like
-        });
-    };
-
-    const addQuestionReply = async (reply) => {
-        dispatchQuestions({
-            type: QUESTIONS_ACTION_TYPE.addReply,
-            payload: reply
         });
     };
 
