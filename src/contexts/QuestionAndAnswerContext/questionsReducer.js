@@ -9,12 +9,21 @@ const QUESTIONS_REDUCER_HANDLERS = {
             return question;
         });
     },
+    ADD_REPLY: (state, reply) => {
+        return state.map(question => {
+            if (question.id === reply.questionId) {
+                question.replies.unshift(reply);
+            }
+            return question;
+        });
+    },
 };
 
 export const QUESTIONS_ACTION_TYPE = {
     initializeQuestions: "INITIALIZE_QUESTIONS",
     addQuestion: "ADD_QUESTION",
-    likeQuestion: "LIKE_QUESTION"
+    likeQuestion: "LIKE_QUESTION",
+    addReply: "ADD_REPLY",
 };
 
 export const questionsReducer = (state, action) => {

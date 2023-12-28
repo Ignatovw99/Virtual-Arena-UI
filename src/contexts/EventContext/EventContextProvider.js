@@ -48,13 +48,27 @@ const EventContextProvider = ({
 
     const addEventParticipant = (participant) => setParticipants(state => [...state, participant]);
 
+    const getSenderData = (senderId) => {
+        if (organizer.id === senderId) {
+            return organizer;
+        }
+
+        const sender = participants.find(participant => participant.id === senderId);
+        if (sender) {
+            return sender;
+        }
+
+        return getUserProfileById(senderId);
+    };
+
     return (
         <EventContext.Provider value={{
             event,
             participants,
             organizer,
             loading,
-            error
+            error,
+            getSenderData
         }}>
             {children}
         </EventContext.Provider>
