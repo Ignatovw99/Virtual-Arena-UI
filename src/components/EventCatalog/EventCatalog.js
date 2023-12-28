@@ -7,9 +7,9 @@ import { ErrorAlert } from "../Alert";
 import useEventDetailsApi from "../../hooks/api/useEventDetailsApi";
 import { useAlert } from "../../hooks/useAlert";
 
-import styles from "./EventsCatalog.module.css";
+import styles from "./EventCatalog.module.css";
 
-const EventsCatalog = ({
+const EventCatalog = ({
     userId
 }) => {
     const [events, setEvents] = useState([]);
@@ -50,4 +50,4 @@ const EventsCatalog = ({
     );
 };
 
-export default EventsCatalog;
+export default EventCatalog;

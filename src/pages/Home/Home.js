@@ -1,11 +1,11 @@
 import Banner from "../../components/Banner";
-import EventsCatalog from "../../components/EventsCatalog";
+import EventCatalog from "../../components/EventCatalog";
 
 const Home = () => {
     return (
         <>
             <Banner />
-            <EventsCatalog />
+            <EventCatalog />
         </>
     );
 };

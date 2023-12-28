@@ -1,8 +1,8 @@
+import Post from "../Post";
+import RepliesContainer from "../RepliesContainer";
+
 import { useWebSocketConnectionContext } from "../../contexts/WebSocketConnectionContext";
 import useQuestionWebSocket from "../../hooks/websocket/useQuestionWebSocket";
-import Post from "../Post";
-import ReplyButton from "../ReplyButton";
-import RepliesCollection from "../RepliesCollection";
 
 import styles from "./Question.module.css";
 
@@ -21,10 +21,7 @@ const Question = ({
                 likes={question.likes}
                 likePost={() => likeQuestion(question.eventId, question.id)}
             />
-            <div className={styles["replies-container"]}>
-                <ReplyButton />
-                <RepliesCollection {...question} />
-            </div>
+            <RepliesContainer replies={question.replies} />
         </div>
     );
 };

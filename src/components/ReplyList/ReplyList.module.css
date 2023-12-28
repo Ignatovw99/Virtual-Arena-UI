@@ -1,4 +1,4 @@
-.replies-container {
+.replies-list-container {
     width: 100%;
     margin-bottom: 20px;
     padding-top: 10px;
@@ -16,9 +16,5 @@
     font-size: 28px;
     font-weight: 600;
     color: rgb(20, 20, 20);
-    margin-bottom: 20px;
-}
-
-.reply-container {
     margin-bottom: 20px;
 }

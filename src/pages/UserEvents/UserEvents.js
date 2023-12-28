@@ -1,4 +1,4 @@
-import EventsCatalog from "../../components/EventsCatalog";
+import EventCatalog from "../../components/EventCatalog";
 import { useUserContext } from "../../contexts/UserContext";
 
 const UserEvents = () => {
@@ -9,7 +9,7 @@ const UserEvents = () => {
             <h1 style={{ fontSize: "30px", fontWeight: 600, paddingTop: "40px", color: "black" }}>
                 My Events
             </h1>
-            <EventsCatalog userId={user.id} />
+            <EventCatalog userId={user.id} />
         </div>
     );
 
