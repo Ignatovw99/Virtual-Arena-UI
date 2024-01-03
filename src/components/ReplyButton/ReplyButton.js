@@ -1,7 +1,8 @@
 import styles from "./ReplyButton.module.css";
 
 const ReplyButton = ({
-    repliesCount
+    repliesCount,
+    toggleRepliesContent
 }) => {
     let content = "Reply";
 
@@ -12,7 +13,10 @@ const ReplyButton = ({
     }
 
     return (
-        <button className={styles["reply-button"]}>
+        <button
+            className={styles["reply-button"]}
+            onClick={toggleRepliesContent}
+        >
             {content}
         </button>
     );
